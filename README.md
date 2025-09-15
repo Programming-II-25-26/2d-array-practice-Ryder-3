@@ -4,3 +4,4 @@ Problem: Imagine You own a bakery that sells different types of bread. Each row 
 You need to calculate the total sales for each bread type and the average daily sales for the entire bakery.
 
 
+The skeleton file bakery.py is provided in this repo. 
