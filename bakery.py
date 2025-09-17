@@ -18,37 +18,12 @@
 
 def getInput():
     #gets the number of types of bread
-    types = input('Enter the number of bread types: ')
-    try: int(types)
-    except ValueError:
-        passable = False
-    else:
-        passable = True
-    
-    while not passable:
-        types = input('Please enter the number of types of bread: ')
-        try: int(types)
-        except ValueError:
-            passable = False
-        else:
-            passable = True
+    types = input('Enter the number of different types of bread ')
+    types = checkValue(types, 'Please enter the number of types of bread: ')
 
     #gets the number of days
     days = input('Enter the number of days: ')
-    try: int(days)
-    except ValueError:
-        passable = False
-    else:
-        passable = True
-    
-    while not passable:
-        days = input('Please enter the number of days the bakery was open: ')
-        try: int(days)
-        except ValueError:
-            passable = False
-        else:
-            passable = True
-    
+    days = checkValue(days, 'Please enter the number of days the bakery was open: ')
 
     #gets the sales number for the week
     days = int(days)
@@ -58,27 +33,24 @@ def getInput():
         week.append([])
         for day_number in range(0, days):
             sale = input(f'how much of type {type_number+1} bread did you sell on day {day_number+1}? ')
-            try: int(sale)
-            except ValueError:
-                passable = False
-            else:
-                passable = True
-            
-            while not passable:
-                sale = input(f'how much of type {type_number+1} bread did you sell on day {day_number+1}? ')
-                try: int(sale)
-                except ValueError:
-                    passable = False
-                else:
-                        passable = True
+            sale = checkValue(sale, f'how much of type {type_number+1} bread did you sell on day {day_number+1}? ')
             week[type_number].append(int(sale))
     return week
 
-
-
-
-
-
+def checkValue(value, error_message):
+    try: int(value)
+    except ValueError:
+        passable = False
+    else:
+        passable = True
+    while not passable:
+        value = input(error_message)
+        try: int(value)
+        except ValueError:
+            passable = False
+        else:
+                passable = True
+    return value
 
 def bakery(full_week):
 
@@ -92,16 +64,11 @@ def bakery(full_week):
     daily_sales = []
     for day in range(0, len(full_week[0])):
         day_average = 0
-        for type in range(0,3):
+        for type in range(0,len(full_week)):
             day_average += full_week[type][day]
         day_average = day_average/len(full_week)
         daily_sales.append(round(day_average, 2))
     print(f'Average daily sales: {daily_sales}')
-        
-
-    
-
-
     
 if __name__ == '__main__':
     week = getInput()
